@@ -1,4 +1,4 @@
-import java.io.Serializable;
+package model;
 
 public class EmployeeFulltime extends Employee {
     private double bonus;

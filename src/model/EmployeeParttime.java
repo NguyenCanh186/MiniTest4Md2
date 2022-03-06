@@ -1,4 +1,4 @@
-import java.io.Serializable;
+package model;
 
 public class EmployeeParttime extends Employee {
     private double workHour;

@@ -1,6 +1,15 @@
+package view;
+
+import controller.EmployeeManager;
+import model.Employee;
+import model.EmployeeFulltime;
+import model.EmployeeParttime;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static controller.EmployeeManager.employeeData;
 
 public class Client {
     private static ArrayList<Employee> employees = EmployeeManager.employeesArraylist;
@@ -52,7 +61,8 @@ public class Client {
         Scanner scanner = new Scanner(System.in);
         System.out.println("nhap id nhan vien muon chinh sua: ");
         String id = scanner.nextLine();
-        for (int i = 0; i < employees.size(); i++) {
+        int size = employees.size();
+        for (int i = 0; i < size; i++) {
             if (employees.get(i).getId().equals(id) &&
                     employees.get(i) instanceof EmployeeFulltime){
                 System.out.println("Nhap ho ten: ");
@@ -122,7 +132,7 @@ public class Client {
             }
         }
         try {
-            EmployeeFile.writeFile(employees);
+            employeeData.writeFile(employees);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -144,14 +154,14 @@ public class Client {
             employees.remove(employees.get(index));
         }
         try {
-            EmployeeFile.writeFile(employees);
+            employeeData.writeFile(employees);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static Employee createNewEmployeeFullTime(){
-              Employee ef = null;
+
              Scanner scanner1 = new Scanner(System.in);
             System.out.println("Nhap ma nhan vien: " );
             String id = scanner1.nextLine();
@@ -183,14 +193,14 @@ public class Client {
             System.out.println("nhap luong co ban: ");
             Scanner scanner8 = new Scanner(System.in);
             double basicSalary = scanner8.nextDouble();
+            Employee ef  = new EmployeeFulltime(id, fullName, age, phoneNumber
+                    , email, bonus, fineMoney, basicSalary);
 
-
-        return ef  = new EmployeeFulltime(id, fullName, age, phoneNumber
-            , email, bonus, fineMoney, basicSalary);
+        return ef ;
     }
 
     public static Employee createNewEmployeePartTime(){
-        Employee ep = null;
+
         Scanner scanner1 = new Scanner(System.in);
         System.out.println("Nhap ma nhan vien: " );
         String id = scanner1.nextLine();
@@ -214,7 +224,9 @@ public class Client {
         System.out.println("nhap so gio lam them cua ban: ");
         Scanner scanner6 = new Scanner(System.in);
         double workHour = scanner6.nextDouble();
-        return ep = new EmployeeParttime(id, fullName, age, phoneNumber, email, workHour);
+
+        Employee ep = new EmployeeParttime(id, fullName, age, phoneNumber, email, workHour);
+        return ep ;
     }
 
     public static void addNewEmployeeFullTime(){

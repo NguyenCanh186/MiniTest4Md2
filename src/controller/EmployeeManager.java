@@ -1,14 +1,20 @@
+package controller;
+
+import model.Employee;
+import storage.EmployeeFromFileBinary;
+import storage.iEmployeeData;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class EmployeeManager {
-    public static ArrayList<Employee> employeesArraylist = EmployeeFile.readFile();
+    public static iEmployeeData employeeData = new EmployeeFromFileBinary();
+    public static ArrayList<Employee> employeesArraylist = employeeData.readFile();
 
     public static void addNewEmployee(Employee newEmployee){
         employeesArraylist.add(newEmployee);
         try {
-            EmployeeFile.writeFile(employeesArraylist);
+            employeeData.writeFile(employeesArraylist);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,7 +38,7 @@ public class EmployeeManager {
 //    }
 //
 //    public static void showAllEmployee(){
-//        for (Employee e: employees
+//        for (model.Employee e: employees
 //             ) {
 //            System.out.println(e);
 //        }
@@ -54,7 +60,7 @@ public class EmployeeManager {
 //            employees.remove(employees.get(index));
 //        }
 //        try {
-//            EmployeeFile.writeFile(employees);
+//            storage.EmployeeFile.writeFile(employees);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -67,12 +73,12 @@ public class EmployeeManager {
 //        System.out.println("2. nhan vien parttime");
 //        System.out.println("nhap lua chon cua ban: ");
 //        int choose = scanner.nextInt();
-//        Employee e = null;
+//        model.Employee e = null;
 //        if (choose == 1) {
-//             e = new EmployeeFulltime();
+//             e = new model.EmployeeFulltime();
 //            e.input();
 //        } else if (choose == 2) {
-//             e = new EmployeeParttime();
+//             e = new model.EmployeeParttime();
 //            e.input();
 //        }
 //        if(e != null){
@@ -81,7 +87,7 @@ public class EmployeeManager {
 //            System.out.println("moi ban nhap lai: ");
 //        }
 //        try {
-//            EmployeeFile.writeFile(employees);
+//            storage.EmployeeFile.writeFile(employees);
 //        } catch (IOException ex) {
 //            ex.printStackTrace();
 //        }
